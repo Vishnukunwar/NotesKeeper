@@ -4,11 +4,14 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon backend/server.js"
+    "start": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm start\"  \"npm run client\""
   },
   "author": "Vishnu Kunwar",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^9.1.2",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "nodemon": "^3.1.10"
