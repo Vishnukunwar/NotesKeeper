@@ -1,9 +1,21 @@
 import React from "react";
 import { Container, Form, FormControl, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
+import { logout } from '../../actions/userActions';
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+    navigate('/');
+  }
 
   return (
     <Navbar expand="lg" bg="primary" variant="dark">
@@ -21,10 +33,7 @@ const Header = () => {
           <NavDropdown title="Vishnu Kunwar" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item onClick={()=>{
-              localStorage.removeItem('userInfo');
-              navigate('/');
-            }}>Logout</NavDropdown.Item>
+            <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Navbar.Collapse>
