@@ -1,15 +1,18 @@
 import { Container, Row, Button } from "react-bootstrap";
 import React, { useEffect } from 'react';
 import './LandingPage.css'
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
 
-// useEffect(() => {
-//     const userInfo = localStorage.getItem('usderInfo');
-//         if(userInfo){
-//             history.push('/mynotes')
-//         }
-//     }, [history]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const userInfo = localStorage.getItem('usderInfo');
+        if(userInfo){
+            navigate('/mynotes');
+        }
+    }, [navigate]);
 
   return <div className="main">
     <Container>

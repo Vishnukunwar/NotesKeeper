@@ -20,7 +20,7 @@ const Header = ({ setSearch }) => {
   return (
     <Navbar expand="lg" bg="primary" variant="dark">
     <Container>
-      <Navbar.Brand><Link to='/'>NotesZipper</Link></Navbar.Brand>
+      <Navbar.Brand><Link to={(userInfo) ? 'mynotes': '/'}>NotesZipper</Link></Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
       <Nav className="m-auto">
@@ -28,14 +28,14 @@ const Header = ({ setSearch }) => {
             <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={(e)=> setSearch(e.target.value)}/>
         </Form>
       </Nav>
-        <Nav>
+        {userInfo ? (<Nav>
           <Nav.Link><Link to="/mynotes">My Notes</Link></Nav.Link>
-          <NavDropdown title="Vishnu Kunwar" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
+          <NavDropdown title={userInfo?.name} id="basic-nav-dropdown">
+            <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
           </NavDropdown>
-        </Nav>
+        </Nav>) : (<Nav><Link to="/login">Login</Link></Nav>)}
       </Navbar.Collapse>
     </Container>
     </Navbar>
